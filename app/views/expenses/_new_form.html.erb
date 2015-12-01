@@ -11,7 +11,7 @@
 
   <p><label>Name of conference / event: <%= f.text_field :name %></label></p>
   <p><label>Date of event: <%= f.text_field :date, type: 'date' %></label></p>
-  <p><label>Cost in £: <%= f.text_field :cost, type: 'number' %></label></p>
+  <p><label>Cost in £: <%= f.text_field :cost, type: 'number', step: '0.01' %></label></p>
   <p><label>URL for ticket purchase: <%= f.text_field :url %></label></p>
   <p><label>Purchase notes / info: <br> <%= f.text_area :notes, cols: 140, rows: 10 %></label></p>
 

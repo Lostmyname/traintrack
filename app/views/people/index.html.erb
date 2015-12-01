@@ -12,7 +12,7 @@
     <% @people.each do |person| %>
       <tr>
         <td><%= link_to person.name, person %></td>
-        <td>£<%= person.remaining %> of £<%= person.budget %></td>
+        <td><%= format_currency person.remaining %> of <%= format_currency person.budget %></td>
       </tr>
     <% end %>
   </tbody>

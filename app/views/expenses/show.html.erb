@@ -1,6 +1,6 @@
 <h1>Request to attend <%= @expense.name %></h1>
 
-<p><%= link_to @expense.person.name, @expense.person %> wants to attend <%= @expense.name %> on the <%= @expense.pretty_date %>. It will cost £<%= @expense.cost %> of their remaining £<%= @expense.person.remaining %>.</p>
+<p><%= link_to @expense.person.name, @expense.person %> wants to attend <%= @expense.name %> on the <%= @expense.pretty_date %>. It will cost <%= format_currency @expense.cost %> of their remaining <%= format_currency @expense.person.remaining %>.</p>
 
 <p>
   The request is currently <strong><%= @expense.status %></strong>.

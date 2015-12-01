@@ -24,7 +24,7 @@
           <%= expense.name %>
         <% end %></td>
       <td><%= expense.pretty_date %></td>
-      <td>£<%= expense.cost %></td>
+      <td><%= format_currency expense.cost %></td>
       <td><%= expense.status %></td>
     </tr>
   <% end %>

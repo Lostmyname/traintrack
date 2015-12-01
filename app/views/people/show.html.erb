@@ -1,6 +1,6 @@
 <h1><%= @person.name %></h1>
 
-<p>£<%= @person.remaining %> of £<%= @person.budget %> remaining.</p>
+<p><%= format_currency @person.remaining %> of <%= format_currency @person.budget %> remaining.</p>
 
 <h2>History:</h2>
 
