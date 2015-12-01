@@ -1,0 +1,7 @@
+<h1>All pending requests:</h1>
+
+<%= render partial: 'expenses/list', locals: { expenses: @expenses_pending, view_person: true } %>
+
+<h1>All approved requests:</h1>
+
+<%= render partial: 'expenses/list', locals: { expenses: @expenses_approved, view_person: true } %>

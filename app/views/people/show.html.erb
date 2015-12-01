@@ -1,0 +1,16 @@
+<h1><%= @person.name %></h1>
+
+<p>£<%= @person.remaining %> of £<%= @person.budget %> remaining.</p>
+
+<h2>History:</h2>
+
+<%= render partial: 'expenses/list', locals: { expenses: @person.expenses } %>
+
+
+<%# @todo: show this bit only if current user %>
+
+<h2>Request conference expenses:</h2>
+
+<p>You must be a permanent employee off your probation period, and you are limited to £1000 a year.</p>
+
+<%= render partial: 'expenses/new_form' %>

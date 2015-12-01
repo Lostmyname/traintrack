@@ -1,0 +1,19 @@
+<h1>People:</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Remaining</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= link_to person.name, person %></td>
+        <td>£<%= person.remaining %> of £<%= person.budget %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

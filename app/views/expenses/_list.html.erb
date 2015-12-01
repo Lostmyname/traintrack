@@ -1,0 +1,32 @@
+<table>
+  <thead>
+  <tr>
+    <% if defined? view_person and view_person %>
+      <th>Person</th>
+    <% end %>
+    <th>Event Name</th>
+    <th>Date</th>
+    <th>Cost</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% expenses.each do |expense| %>
+    <tr>
+      <% if defined? view_person and view_person %>
+        <td><%= link_to expense.person.name, expense.person %></td>
+      <% end %>
+      <td>
+        <% if true || admin? %>
+          <%= link_to expense.name, expense %>
+        <% else %>
+          <%= expense.name %>
+        <% end %></td>
+      <td><%= expense.pretty_date %></td>
+      <td>£<%= expense.cost %></td>
+      <td><%= expense.status %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

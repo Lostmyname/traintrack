@@ -1,0 +1,19 @@
+<%= form_for :expenses, url: expenses_path do |f| %>
+
+  <% if @expense.errors.any? %>
+    <h2>Problem!!</h2>
+    <ul>
+      <% @expense.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <p><label>Name of conference / event: <%= f.text_field :name %></label></p>
+  <p><label>Date of event: <%= f.text_field :date, type: 'date' %></label></p>
+  <p><label>Cost in £: <%= f.text_field :cost, type: 'number' %></label></p>
+  <p><label>URL for ticket purchase: <%= f.text_field :url %></label></p>
+  <p><label>Purchase notes / info: <br> <%= f.text_area :notes, cols: 140, rows: 10 %></label></p>
+
+  <button type="submit">Request conference expense</button>
+<% end %>

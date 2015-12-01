@@ -1,0 +1,19 @@
+<h1>Create a new person:</h1>
+
+<%= form_for :people, url: people_path do |f| %>
+
+  <% if @person.errors.any? %>
+    <h2>Problem!!</h2>
+    <ul>
+      <% @person.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <p><label>Name: <%= f.text_field :name %></label></p>
+  <p><label>Yearly budget: <%= f.text_field :budget, type: 'number', value: '1000' %></label></p>
+  <p><label>Admin? <%= f.check_box :admin %> </label></p>
+
+  <p><%= f.submit %></p>
+<% end %>

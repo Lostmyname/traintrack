@@ -1,0 +1,20 @@
+<h1>Request to attend <%= @expense.name %></h1>
+
+<p><%= link_to @expense.person.name, @expense.person %> wants to attend <%= @expense.name %> on the <%= @expense.pretty_date %>. It will cost £<%= @expense.cost %> of their remaining £<%= @expense.person.remaining %>.</p>
+
+<p>
+  The request is currently <%= @expense.status %>.
+
+  <%= button_to 'Mark as approved', @expense, method: :put, params: { status: 'approved' } if @expense.status == 'pending' %>
+  <%= button_to 'Mark as bought', @expense, method: :put, params: { status: 'bought' } if @expense.status == 'pending' || @expense.status == 'approved' %>
+</p>
+
+<% unless @expense.url.blank? %>
+  <p>URL to purchase tickets: <%= link_to @expense.url, @expense.url %></p>
+<% end %>
+
+<% unless @expense.notes.blank? %>
+  <h2>Notes:</h2>
+
+  <pre><%= @expense.notes %></pre>
+<% end %>
