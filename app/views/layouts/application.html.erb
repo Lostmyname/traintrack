@@ -9,6 +9,12 @@
 </head>
 <body>
 
+<% if person_signed_in? %>
+  <p>Hello <%= current_person.name.split.first %>! <%= link_to 'Sign out?', sign_out_path %></p>
+<% else %>
+  <p>You should probably <%= link_to 'sign in', person_omniauth_authorize_path(:slack) %> :)</p>
+<% end %>
+
 <%= yield %>
 
 </body>

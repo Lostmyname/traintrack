@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
 
+  before_action :authenticate_person!, only: [:new, :create]
+
   # List people.
   def index
     @people = Person.all

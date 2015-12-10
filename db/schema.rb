@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130152159) do
+ActiveRecord::Schema.define(version: 20151210153124) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "expenses", force: :cascade do |t|
     t.text     "name"
@@ -25,15 +28,18 @@ ActiveRecord::Schema.define(version: 20151130152159) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "expenses", ["person_id"], name: "index_expenses_on_person_id"
+  add_index "expenses", ["person_id"], name: "index_expenses_on_person_id", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.string   "name"
-    t.float    "budget"
-    t.float    "remaining"
-    t.boolean  "admin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "budget",              default: 1000.0
+    t.float    "remaining",           default: 1000.0
+    t.boolean  "admin",               default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.datetime "remember_created_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
 end
