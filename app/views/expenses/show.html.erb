@@ -5,9 +5,9 @@
 <p>
   The request is currently <strong><%= @expense.status %></strong>.
 
-  <%= button_to 'Mark as approved', @expense, method: :put, params: { status: 'approved' } if @expense.status == 'pending' %>
-  <%= button_to 'Mark as rejected', @expense, method: :put, params: { status: 'rejected' } if @expense.status == 'pending' %>
-  <%= button_to 'Mark as bought', @expense, method: :put, params: { status: 'bought' } if @expense.status == 'pending' || @expense.status == 'approved' %>
+  <%= button_to 'Mark as approved', @expense, class: 'btn btn-success', method: :put, params: { status: 'approved' } if @expense.status == 'pending' %>
+  <%= button_to 'Mark as rejected', @expense, class: 'btn btn-danger', method: :put, params: { status: 'rejected' } if @expense.status == 'pending' %>
+  <%= button_to 'Mark as bought', @expense, class: 'btn btn-default', method: :put, params: { status: 'bought' } if @expense.status == 'approved' %>
 </p>
 
 <% unless @expense.url.blank? %>
