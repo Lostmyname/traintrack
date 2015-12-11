@@ -35,13 +35,12 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    @person = Person.find(1) # todo: get current user
-    @expense = @person.expenses.create(expense_params)
+    @expense = current_person.expenses.create(expense_params)
     @expense.update_attributes(status: 'pending')
 
     @expense.save
 
-    redirect_to @person
+    redirect_to current_person
   end
 
   private
