@@ -1,6 +1,9 @@
 class PeopleController < ApplicationController
 
-  before_action :authenticate_person!, only: [:new, :create]
+  include ApplicationHelper
+
+  before_action :authenticate_person!
+  before_action :authenticate_admin!, only: [:new, :create]
 
   # List people.
   def index

@@ -1,4 +1,10 @@
 class ExpensesController < ApplicationController
+
+  include ApplicationHelper
+
+  before_action :authenticate_person!
+  before_action :authenticate_admin!, only: [:index, :show, :update]
+
   # List all, filter by pending. admin only.
   def index
     @expenses_pending = Expense.where(status: 'pending')
