@@ -24,7 +24,7 @@
         <td><%= link_to expense.person.name, expense.person %></td>
       <% end %>
       <td>
-        <% if true || admin? %>
+        <% if current_person_admin? %>
           <%= link_to expense.name, expense %>
         <% else %>
           <%= expense.name %>

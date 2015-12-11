@@ -13,7 +13,8 @@ class PeopleController < ApplicationController
   # View person.
   def show
     # number or "me"
-    @person = Person.find(params[:id])
+    id = params[:id] == 'me' ? current_person.id : params[:id]
+    @person = Person.find(id)
     @expense = Expense.new
   end
 
