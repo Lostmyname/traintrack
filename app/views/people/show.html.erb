@@ -7,10 +7,9 @@
 <%= render partial: 'expenses/list', locals: { expenses: @person.expenses } %>
 
 
-<%# @todo: show this bit only if current user %>
+<% if current_person == @person %>
+  <h2>Request conference expenses:</h2>
+  <p>You must be a permanent employee off your probation period, and you are limited to <%= format_currency current_person.budget %> a year—you have <%= format_currency current_person.remaining %> left.</p>
 
-<h2>Request conference expenses:</h2>
-
-<p>You must be a permanent employee off your probation period, and you are limited to <%= format_currency current_person.budget %> a year—you have <%= format_currency current_person.remaining %> left.</p>
-
-<%= render partial: 'expenses/new_form' %>
+  <%= render partial: 'expenses/new_form' %>
+<% end %>
