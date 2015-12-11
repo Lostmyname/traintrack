@@ -1,6 +1,6 @@
 <h1>Request conference expenses:</h1>
 
-<p>You must be a permanent employee off your probation period, and you are limited to £1000 a year.</p>
+<p>You must be a permanent employee off your probation period, and you are limited to <%= format_currency current_person.budget %> a year—you have <%= format_currency current_person.remaining %> left.</p>
 
 
 <%= render 'expenses/new_form' %>

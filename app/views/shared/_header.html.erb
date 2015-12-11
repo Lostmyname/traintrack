@@ -1,0 +1,42 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Train Track', root_path, class: 'navbar-brand' %>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <% if person_signed_in? %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Submit new claim', new_expense_path %></li>
+
+          <% if current_person_admin? %>
+            <li><%= link_to 'People', people_path %></li>
+            <li><%= link_to 'Expense requests', expenses_path %></li>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <%= current_person.name %> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'View my page', current_person %></li>
+              <li><%= link_to 'Submit new claim', new_expense_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Sign out', sign_out_path %></li>
+            </ul>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'Sign in', person_omniauth_authorize_path(:slack) %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</nav>

@@ -3,19 +3,18 @@
 <head>
   <title>Train Track</title>
 
-  <%= stylesheet_link_tag    'application' %>
-  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<% if person_signed_in? %>
-  <p>Hello <%= current_person.name.split.first %>! <%= link_to 'Sign out?', sign_out_path %></p>
-<% else %>
-  <p>You should probably <%= link_to 'sign in', person_omniauth_authorize_path(:slack) %> :)</p>
-<% end %>
+<%= render 'shared/header' %>
 
-<%= yield %>
+<div class="container">
+  <%= yield %>
+</div>
+
+<%= javascript_include_tag 'application' %>
 
 </body>
 </html>

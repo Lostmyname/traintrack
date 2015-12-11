@@ -1,4 +1,4 @@
-<table>
+<table class="table table-striped table-bordered">
   <thead>
   <tr>
     <% if defined? view_person and view_person %>
@@ -12,6 +12,12 @@
   </thead>
 
   <tbody>
+  <% if expenses.empty? %>
+    <tr>
+      <td colspan="5">No requests here!</td>
+    </tr>
+  <% end %>
+
   <% expenses.each do |expense| %>
     <tr>
       <% if defined? view_person and view_person %>
