@@ -1,11 +1,37 @@
-<h1><%= @person.name %></h1>
+<h1><%= @person.name %> <% if @person.admin %><span class="label label-info">Admin</span><% end %></h1>
 
-<p><%= format_currency @person.remaining %> of <%= format_currency @person.budget %> remaining.</p>
+<% if current_person_admin? %>
+  <p>
+    <% button_text = @person.admin ? 'Demote to normal user' : 'Make admin' %>
+    <%= button_to button_text, @person, class: 'btn btn-warning', method: :put, params: { toggle_admin: true } %>
+  </p>
+<% end %>
+
+<p>
+  <%= format_currency @person.remaining %> of <%= format_currency @person.budget %> remaining.
+  <% if current_person_admin? %>
+    <a data-toggle="collapse" href="#change-budget">Change budget.</a>
+  <% end %>
+</p>
+
+<% if current_person_admin? %>
+  <div class="collapse" id="change-budget">
+    <%= form_for :person, url: person_path, method: :put, html: { class: 'form-inline' } do |f| %>
+      <div class="form-group">
+        <%= f.label :budget, 'Change budget:' %>
+        <div class="input-group">
+          <span class="input-group-addon">£</span>
+          <%= f.text_field :budget, type: 'number', step: '0.01', class: 'form-control', placeholder: 'Yearly budget in GBP' %>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default">Change</button>
+    <% end %>
+  </div>
+<% end %>
 
 <h2>History:</h2>
 
 <%= render partial: 'expenses/list', locals: { expenses: @person.expenses } %>
-
 
 <% if current_person == @person %>
   <h2>Request conference expenses:</h2>
