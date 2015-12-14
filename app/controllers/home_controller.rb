@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
 
-  include ApplicationHelper
   before_action :authenticate_person!
 
   def index

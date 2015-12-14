@@ -1,34 +1,7 @@
 class ExpensesController < ApplicationController
 
-  include ApplicationHelper
-
   before_action :authenticate_person!
   before_action :authenticate_admin!, only: [:index, :show, :update]
-
-  # List all, filter by pending. admin only.
-  def index
-    @expenses_pending = Expense.where(status: 'pending')
-    @expenses_approved = Expense.where(status: 'approved')
-  end
-
-  # Admin only. See details, change status.
-  def show
-    @expense = Expense.find(params[:id])
-  end
-
-  # Admin only. Change ticket status.
-  def update
-    @expense = Expense.find(params[:id])
-    @expense.status = params[:status]
-
-    if params[:status] == 'approved'
-      @expense.person.decrement(:remaining, @expense.cost)
-    end
-
-    @expense.save
-
-    redirect_to @expense
-  end
 
   def new
     @expense = Expense.new
@@ -43,6 +16,31 @@ class ExpensesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  # List all, filter by pending. Admin only.
+  def index
+    @expenses_pending = Expense.where(status: 'pending')
+    @expenses_approved = Expense.where(status: 'approved')
+  end
+
+  # See details, change status. Admin only.
+  def show
+    @expense = Expense.find(params[:id])
+  end
+
+  # Change ticket status. Admin only.
+  def update
+    @expense = Expense.find(params[:id])
+    @expense.status = params[:status]
+
+    if params[:status] == 'approved'
+      @expense.person.decrement(:remaining, @expense.cost)
+    end
+
+    @expense.save
+
+    redirect_to @expense
   end
 
   private

@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
     @expense = Expense.new
   end
 
-  # Change a person (budget / admin status), admin only
+  # Change a person (budget / admin status). Admin only.
   def update
     @person = get_person_from_params
 
