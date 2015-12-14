@@ -19,7 +19,7 @@ class ExpensesController < ApplicationController
   # Admin only. Change ticket status.
   def update
     @expense = Expense.find(params[:id])
-    @expense.update_attributes(status: params[:status])
+    @expense.status = params[:status]
     @expense.save
 
     if params[:status] == 'approved'
@@ -36,11 +36,13 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = current_person.expenses.create(expense_params)
-    @expense.update_attributes(status: 'pending')
+    @expense.status = 'pending'
 
-    @expense.save
-
-    redirect_to current_person
+    if @expense.save
+      redirect_to current_person
+    else
+      render 'new'
+    end
   end
 
   private
