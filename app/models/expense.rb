@@ -6,6 +6,10 @@ class Expense < ActiveRecord::Base
   validates :cost, presence: true
   validates :status, inclusion: { in: %w(pending approved bought rejected) }
 
+  default_scope {
+    order('date DESC')
+  }
+
   def pretty_date
     date.to_datetime.strftime "%d/%m/%y"
   end
