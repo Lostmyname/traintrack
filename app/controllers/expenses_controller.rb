@@ -20,12 +20,12 @@ class ExpensesController < ApplicationController
   def update
     @expense = Expense.find(params[:id])
     @expense.status = params[:status]
-    @expense.save
 
     if params[:status] == 'approved'
       @expense.person.decrement(:remaining, @expense.cost)
-      @expense.person.save
     end
+
+    @expense.save
 
     redirect_to @expense
   end
