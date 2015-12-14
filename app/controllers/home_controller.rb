@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     if current_person_admin?
       redirect_to expenses_path
     else
-      redirect_to new_expense_path
+      redirect_to person_path('me')
     end
   end
 end
