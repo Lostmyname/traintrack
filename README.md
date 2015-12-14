@@ -1,5 +1,7 @@
 # traintrack
 
+![](http://i.giphy.com/pkKfX8NzvSW88.gif)
+
 A rails app for tracking personal development expenses.
 
 Train Track. get it?
@@ -31,3 +33,7 @@ GO:
 ```
 rails server
 ```
+
+## To deploy
+
+Master is automatically deployed. Don't push WIP commits.
