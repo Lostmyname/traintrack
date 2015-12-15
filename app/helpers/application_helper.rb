@@ -6,7 +6,13 @@ module ApplicationHelper
       args[:precision] = 0;
     end
 
-    number_to_currency(amount, args)
+    formatted = number_to_currency(amount, args)
+
+    if amount < 0
+      return "<span style='color: red'>#{formatted}</span>".html_safe
+    end
+
+    formatted
   end
 
   def current_person_admin?
