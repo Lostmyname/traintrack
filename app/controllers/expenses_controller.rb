@@ -34,8 +34,6 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
     @expense.update_attributes(status: params[:status])
 
-    notify = NotificationsService.new
-
     message = case params[:status]
       when 'rejected'
         "Your request to attend #{@expense.name} has been rejected by #{current_person.name} for reason: todo."
@@ -50,7 +48,7 @@ class ExpensesController < ApplicationController
         "The status for your request to attend #{@expense.name} has been changed to #{params[:status]} by #{current_person.name}"
       end
 
-    notify.send_message(@expense.person.uid, message)
+    NotificationsService::send_message(@expense.person.uid, message)
 
     redirect_to @expense
   end

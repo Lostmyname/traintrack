@@ -1,10 +1,8 @@
 class NotificationsService
-  def initialize
-    @client = Slack::Web::Client.new
-  end
+  @@client = Slack::Web::Client.new
 
-  def send_message(uid, message)
-    data = @client.im_open(user: uid)
-    @client.chat_postMessage(channel: data['channel']['id'], text: message, as_user: true)
+  def self.send_message(uid, message)
+    data = @@client.im_open(user: uid)
+    @@client.chat_postMessage(channel: data['channel']['id'], text: message, as_user: true)
   end
 end
