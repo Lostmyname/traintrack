@@ -24,7 +24,7 @@ class PeopleController < ApplicationController
       @person.admin = !@person.admin
 
       if @person.admin
-        NotificationsService::send_message(@person.uid, 'You are now an admin :)')
+        NotificationsService.send_message(@person.uid, 'You are now an admin :)')
       end
     end
 

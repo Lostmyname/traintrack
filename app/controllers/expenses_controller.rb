@@ -48,7 +48,7 @@ class ExpensesController < ApplicationController
         "The status for your request to attend #{@expense.name} has been changed to #{params[:status]} by #{current_person.name}"
       end
 
-    NotificationsService::send_message(@expense.person.uid, message)
+    NotificationsService.send_message(@expense.person.uid, message)
 
     redirect_to @expense
   end
