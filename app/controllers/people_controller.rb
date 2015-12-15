@@ -20,8 +20,14 @@ class PeopleController < ApplicationController
   def update
     @person = get_person_from_params
 
+    notify = NotificationsService.new
+
     if params[:toggle_admin]
       @person.admin = !@person.admin
+
+      if @person.admin
+        notify.send_message(@person.uid, 'You are now an admin :)')
+      end
     end
 
     if params[:person] && params[:person][:budget]

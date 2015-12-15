@@ -29,15 +29,28 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
   end
 
-  # Change ticket status. Admin only.
+  # Change expense status. Admin only.
   def update
     @expense = Expense.find(params[:id])
     @expense.update_attributes(status: params[:status])
 
-    if params[:status] == 'approved'
-      @expense.person.recalculate_remaining!
-      @expense.person.save
-    end
+    notify = NotificationsService.new
+
+    message = case params[:status]
+      when 'rejected'
+        "Your request to attend #{@expense.name} has been rejected by #{current_person.name} for reason: todo."
+      when 'approved'
+        @expense.person.recalculate_remaining!
+        @expense.person.save
+
+        "Your request to attend #{@expense.name} has been approved by #{current_person.name}."
+      when 'bought'
+        "Your ticket for #{@expense.name} has been bought by #{current_person.name}—expect an email soon!"
+      else
+        "The status for your request to attend #{@expense.name} has been changed to #{params[:status]} by #{current_person.name}"
+      end
+
+    notify.send_message(@expense.person.uid, message)
 
     redirect_to @expense
   end
