@@ -24,7 +24,7 @@ class PeopleController < ApplicationController
       @person.admin = !@person.admin
     end
 
-    if params[:person][:budget]
+    if params[:person] && params[:person][:budget]
       @person.budget = params[:person][:budget]
     end
 
