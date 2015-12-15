@@ -1,5 +1,7 @@
 class ExpensesController < ApplicationController
 
+  include ActionView::Helpers::NumberHelper
+
   before_action :authenticate_person!
   before_action :authenticate_admin!, only: [:index, :show, :update]
 
@@ -13,6 +15,9 @@ class ExpensesController < ApplicationController
 
     if @expense.save
       redirect_to current_person
+
+      message = "#{current_person.name} would like to go to #{@expense.name}, which is on #{@expense.pretty_date} and costs #{format_currency @expense.cost}: #{expense_url(@expense)}"
+      NotificationsService.send_channel_message('traintrack-requests', message)
     else
       render 'new'
     end
@@ -48,7 +53,7 @@ class ExpensesController < ApplicationController
         "The status for your request to attend #{@expense.name} has been changed to #{params[:status]} by #{current_person.name}"
       end
 
-    NotificationsService.send_message(@expense.person.uid, message)
+    NotificationsService.send_user_message(@expense.person.uid, message)
 
     redirect_to @expense
   end
