@@ -26,6 +26,7 @@ class PeopleController < ApplicationController
 
     if params[:person] && params[:person][:budget]
       @person.budget = params[:person][:budget]
+      @person.recalculate_remaining!
     end
 
     @person.save

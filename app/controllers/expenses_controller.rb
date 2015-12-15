@@ -32,13 +32,12 @@ class ExpensesController < ApplicationController
   # Change ticket status. Admin only.
   def update
     @expense = Expense.find(params[:id])
-    @expense.status = params[:status]
+    @expense.update_attributes(status: params[:status])
 
     if params[:status] == 'approved'
-      @expense.person.decrement(:remaining, @expense.cost)
+      @expense.person.recalculate_remaining!
+      @expense.person.save
     end
-
-    @expense.save
 
     redirect_to @expense
   end

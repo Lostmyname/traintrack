@@ -7,4 +7,9 @@ class Person < ActiveRecord::Base
   default_scope {
     order('name ASC')
   }
+
+  def recalculate_remaining!
+    total = expenses.inject(0) { |sum, expense| sum + expense.cost }
+    self.remaining = budget - total
+  end
 end
