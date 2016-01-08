@@ -6,12 +6,16 @@
   <%= stylesheet_link_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="skin-<%= ['blue', 'yellow', 'green', 'purple', 'red'].sample %>-light layout-top-nav">
 
 <%= render 'shared/header' %>
 
-<div class="container">
-  <%= yield %>
+<div class="wrapper">
+  <div class="content-wrapper">
+    <div class="container">
+      <%= yield %>
+    </div>
+  </div>
 </div>
 
 <%= javascript_include_tag 'application' %>

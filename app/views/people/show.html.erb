@@ -29,9 +29,15 @@
   </div>
 <% end %>
 
-<h2>History:</h2>
+<div class="box">
+  <div class="box-header">
+    <h2 class="box-title">History</h2>
+  </div>
 
-<%= render partial: 'expenses/list', locals: { expenses: @person.expenses } %>
+  <div class="box-body">
+    <%= render partial: 'expenses/list', locals: { expenses: @person.expenses } %>
+  </div>
+</div>
 
 <% if current_person == @person %>
   <h2>Request conference expenses:</h2>

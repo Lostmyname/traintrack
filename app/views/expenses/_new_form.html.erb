@@ -1,62 +1,68 @@
 <%= form_for :expenses, url: expenses_path, html: { class: 'form-horizontal' } do |f| %>
-
-  <div class="form-group">
-    <div class="col-sm-offset-1 col-sm-11">
-      <h3>Conference details</h3>
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Conference details</h3>
     </div>
-  </div>
 
-  <!-- @todo: Make this pretty -->
-  <% if @expense.errors.any? %>
-    <h2>Problem!!</h2>
-    <ul>
-      <% @expense.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+    <div class="box-body">
+
+      <!-- @todo: Make this pretty -->
+      <% if @expense.errors.any? %>
+        <div class="callout callout-danger">
+          <h4>Problem!!</h4>
+
+          <ul>
+            <% @expense.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul>
-  <% end %>
 
-  <div class="form-group">
-    <%= f.label :name, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-11">
-        <%= f.text_field :name, class: 'form-control', placeholder: 'Name of conference / event' %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :date, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-11">
-      <%= f.text_field :date, class: 'form-control', type: 'date' %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :cost, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-11">
-      <div class="input-group">
-        <span class="input-group-addon">£</span>
-        <%= f.text_field :cost, type: 'number', step: '0.01', class: 'form-control', placeholder: 'Cost in GBP' %>
+      <div class="form-group">
+        <%= f.label :name, class: 'col-sm-1 control-label' %>
+        <div class="col-sm-11">
+            <%= f.text_field :name, class: 'form-control', placeholder: 'Name of conference / event' %>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :url, 'URL', class: 'col-sm-1 control-label' %>
-    <div class="col-sm-11">
-      <%= f.text_field :url, class: 'form-control', placeholder: 'URL for ticket purchase' %>
-    </div>
-  </div>
+      <div class="form-group">
+        <%= f.label :date, class: 'col-sm-1 control-label' %>
+        <div class="col-sm-11">
+          <%= f.text_field :date, class: 'form-control', type: 'date' %>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :notes, 'Notes', class: 'col-sm-1 control-label' %>
-    <div class="col-sm-11">
-      <%= f.text_area :notes, class: 'form-control', rows: 10, placeholder: 'Purchase notes / info' %>
-    </div>
-  </div>
+      <div class="form-group">
+        <%= f.label :cost, class: 'col-sm-1 control-label' %>
+        <div class="col-sm-11">
+          <div class="input-group">
+            <span class="input-group-addon">£</span>
+            <%= f.text_field :cost, type: 'number', step: '0.01', class: 'form-control', placeholder: 'Cost in GBP' %>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-1 col-sm-11">
-      <button type="submit" class="btn btn-default">Request conference expense</button>
+      <div class="form-group">
+        <%= f.label :url, 'URL', class: 'col-sm-1 control-label' %>
+        <div class="col-sm-11">
+          <%= f.text_field :url, class: 'form-control', placeholder: 'URL for ticket purchase' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :notes, 'Notes', class: 'col-sm-1 control-label' %>
+        <div class="col-sm-11">
+          <%= f.text_area :notes, class: 'form-control', rows: 10, placeholder: 'Purchase notes / info' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-11">
+          <button type="submit" class="btn btn-default">Request conference expense</button>
+        </div>
+      </div>
+
     </div>
   </div>
 <% end %>

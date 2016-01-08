@@ -1,10 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-body {
-	margin-bottom: 100px;
-}
+@import "adminLTE/AdminLTE";
+@import "adminLTE/skins/all-skins";
 
 form.button_to {
 	display: inline;
+}
+
+html, body {
+	background-color: #ecf0f5;
 }
