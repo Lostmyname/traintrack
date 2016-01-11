@@ -34,33 +34,43 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
   end
 
-  # Change expense status. Admin only.
+  # Change expense status or cost. Admin only.
   def update
     @expense = Expense.find(params[:id])
-    @expense.update_attributes(status: params[:status])
 
-    message = case params[:status]
-      when 'rejected'
-        "Your request to attend #{@expense.name} has been rejected by #{current_person.name} for reason: #{params[:reason]}."
-      when 'approved'
-        @expense.person.recalculate_remaining!
-        @expense.person.save
+    if params.has_key?(:status)
+      @expense.update_attributes(status: params[:status])
 
-        "Your request to attend #{@expense.name} has been approved by #{current_person.name}."
-      when 'bought'
-        "Your ticket for #{@expense.name} has been bought by #{current_person.name}—expect an email soon!"
-      else
-        "The status for your request to attend #{@expense.name} has been changed to #{params[:status]} by #{current_person.name}"
-      end
+      message = case params[:status]
+        when 'rejected'
+          "Your request to attend #{@expense.name} has been rejected by #{current_person.name} for reason: #{params[:reason]}."
+        when 'approved'
+          @expense.person.recalculate_remaining!
+          @expense.person.save
 
-    NotificationsService.send_user_message(@expense.person.uid, message)
+          "Your request to attend #{@expense.name} has been approved by #{current_person.name}."
+        when 'bought'
+          "Your ticket for #{@expense.name} has been bought by #{current_person.name}—expect an email soon!"
+        else
+          "The status for your request to attend #{@expense.name} has been changed to #{params[:status]} by #{current_person.name}"
+        end
+
+      NotificationsService.send_user_message(@expense.person.uid, message)
+    end
+
+    if params.has_key?(:expense)
+      @expense.update_attributes(expense_params(:expense))
+
+      @expense.person.recalculate_remaining!
+      @expense.person.save
+    end
 
     redirect_to @expense
   end
 
   private
 
-  def expense_params
-    params.require(:expenses).permit(:name, :date, :cost, :url, :notes)
+  def expense_params(name = :expenses)
+    params.require(name).permit(:name, :date, :cost, :url, :notes)
   end
 end

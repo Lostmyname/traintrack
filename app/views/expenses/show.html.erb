@@ -1,6 +1,6 @@
 <h1>Request to attend <%= @expense.name %></h1>
 
-<p><%= link_to @expense.person.name, @expense.person %> wants to attend <%= @expense.name %> on the <%= @expense.pretty_date %>. It will cost <%= format_currency @expense.cost %> of their remaining <%= format_currency @expense.person.remaining %>.</p>
+<p><%= link_to @expense.person.name, @expense.person %> wants to attend <%= @expense.name %> on the <%= @expense.pretty_date %>. It will cost <%= format_currency @expense.cost %> <a href data-toggle="modal" data-target="#myModal">(change)</a> of their remaining <%= format_currency @expense.person.remaining %>.</p>
 
 <p>
   The request is currently <strong><%= @expense.status %></strong>.
@@ -19,3 +19,32 @@
 
   <pre><%= @expense.notes %></pre>
 <% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_for @expense, html: { class: 'form-horizontal' } do |f| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Change expense cost</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :cost, class: 'col-sm-1 control-label' %>
+            <div class="col-sm-11">
+              <div class="input-group">
+                <span class="input-group-addon">£</span>
+                <%= f.text_field :cost, type: 'number', step: '0.01', class: 'form-control', placeholder: 'Cost in GBP' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <%= submit_tag 'Save changes', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
