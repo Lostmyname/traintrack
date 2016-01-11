@@ -41,7 +41,7 @@ class ExpensesController < ApplicationController
 
     message = case params[:status]
       when 'rejected'
-        "Your request to attend #{@expense.name} has been rejected by #{current_person.name} for reason: todo."
+        "Your request to attend #{@expense.name} has been rejected by #{current_person.name} for reason: #{params[:reason]}."
       when 'approved'
         @expense.person.recalculate_remaining!
         @expense.person.save
