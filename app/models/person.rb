@@ -9,7 +9,9 @@ class Person < ActiveRecord::Base
   }
 
   def recalculate_remaining!
-    total = expenses.inject(0) { |sum, expense| sum + expense.cost }
+    total = expenses
+      .where(status: %w(approved bought))
+      .inject(0) { |sum, expense| sum + expense.cost }
     self.remaining = budget - total
   end
 end
