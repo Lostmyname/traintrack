@@ -17,7 +17,7 @@ class ExpensesController < ApplicationController
       redirect_to current_person
 
       message = "#{current_person.name} would like to go to #{@expense.name}, which is on #{@expense.pretty_date} and costs #{format_currency @expense.cost}: #{expense_url(@expense)}"
-      NotificationsService.send_channel_message('traintrack-requests', message)
+      NotificationsService.send_channel_message(ENV['SLACK_CHANNEL'], message)
     else
       render 'new'
     end
