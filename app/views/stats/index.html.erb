@@ -1,0 +1,27 @@
+<div class="content">
+  <div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">Conferences per month</h3>
+    </div>
+
+    <div class="box-body">
+      <div class="chart">
+        <canvas id="conferences-per-month"><%= @number_per_month.to_json %></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">Cost per month</h3>
+    </div>
+
+    <div class="box-body">
+      <div class="chart">
+        <canvas id="cost-per-month"><%= @cost_per_month.to_json %></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>

@@ -2,3 +2,4 @@
 //= require bootstrap-sprockets
 
 //= require rejected
+//= require stats

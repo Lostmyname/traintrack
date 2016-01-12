@@ -6,7 +6,7 @@ class Expense < ActiveRecord::Base
   validates :cost, presence: true
   validates :status, inclusion: { in: %w(pending approved bought rejected) }
 
-  default_scope {
+  scope :ordered, -> {
     order('date DESC')
   }
 

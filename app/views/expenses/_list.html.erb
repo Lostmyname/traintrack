@@ -18,7 +18,7 @@
     </tr>
   <% end %>
 
-  <% expenses.each do |expense| %>
+  <% expenses.ordered.each do |expense| %>
     <tr>
       <td>
         <% if current_person_admin? %>

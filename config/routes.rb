@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :people
   resources :expenses
 
+  get '/stats' => 'stats#index'
+
   root 'home#index'
 
   devise_scope :person do
